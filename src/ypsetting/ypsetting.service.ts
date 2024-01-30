@@ -1,30 +1,23 @@
 import { Injectable } from '@nestjs/common';
-
+import { ConfigService } from '@nestjs/config';
+import Datastore from '@seald-io/nedb';
 @Injectable()
 export class YpsettingService {
+    constructor(private configService: ConfigService) {}
     getypsetting(): any {
-        const scanInterval = process.env.SCAN_INTERVAL || '30'; // 默认值为 '30'，如果环境变量不存在
-        const songLimit = process.env.SONG_LIMIT || '10'; // 默认值为 '10'，如果环境变量不存在
-        const downloadDir = process.env.DOWNLOAD_DIR || '/mnt/nas'; // 默认值为 '/mnt/nas'，如果环境变量不存在
-        const phone = process.env.PHONE || ''; // 默认值为空字符串，如果环境变量不存在
-        const password = process.env.PASSWORD || ''; // 默认值为空字符串，如果环境变量不存在
-        const playlist = process.env.PLAYLIST || ''; // 默认值为空字符串，如果环境变量不存在
-        const plexServer = process.env.PLEX_SERVER || ''; // 默认值为空字符串，如果环境变量不存在
-        const plexPort = process.env.PLEX_PORT || ''; // 默认值为空字符串，如果环境变量不存在
-        const plexToken = process.env.PLEX_TOKEN || ''; // 默认值为空字符串，如果环境变量不存在
-
+        const db = new Datastore({ filename: '../db/env.db', autoload: true });
+        console.log('♿️ - YpsettingService - getypsetting - db:', db);
         const data = {
-            scanInterval,
-            songLimit,
-            downloadDir,
-            phone,
-            password,
-            playlist,
-            plexServer,
-            plexPort,
-            plexToken,
+            scan_interval: this.configService.get<number>('scan_interval') ?? process.env.SCAN_INTERVAL ?? '30',
+            song_limit: this.configService.get<number>('song_limit') ?? process.env.SONG_LIMIT ?? '10',
+            download_dir: this.configService.get<string>('download_dir') ?? process.env.DOWNLOAD_DIR ?? '/mnt/nas',
+            phone: this.configService.get<number>('phone') ?? process.env.PHONE ?? '',
+            password: this.configService.get<string>('password') ?? process.env.PASSWORD ?? '',
+            playlist: this.configService.get<string>('playlist') ?? process.env.PLAYLIST ?? '',
+            plex_server: this.configService.get<string>('plex_server') ?? process.env.PLEX_SERVER ?? '',
+            plex_port: this.configService.get<number>('plex_port') ?? process.env.PLEX_PORT ?? '',
+            plex_token: this.configService.get<string>('plex_token') ?? process.env.PLEX_TOKEN ?? '',
         };
-
         return { code: 0, msg: 'ok', data };
     }
 }

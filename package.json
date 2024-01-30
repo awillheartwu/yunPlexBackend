@@ -1,74 +1,145 @@
 {
-  "name": "backend",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
-  "scripts": {
-    "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage",
-    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
-    "commit": "git-cz",
-    "release": "standard-version"
-  },
-  "dependencies": {
-    "@nestjs/common": "^10.0.0",
-    "@nestjs/core": "^10.0.0",
-    "@nestjs/platform-express": "^10.2.10",
-    "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1"
-  },
-  "devDependencies": {
-    "@nestjs/cli": "^10.0.0",
-    "@nestjs/schematics": "^10.0.0",
-    "@nestjs/testing": "^10.0.0",
-    "@types/express": "^4.17.17",
-    "@types/jest": "^29.5.2",
-    "@types/node": "^20.3.1",
-    "@types/supertest": "^2.0.12",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "eslint": "^8.42.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "jest": "^29.5.0",
-    "prettier": "^3.0.0",
-    "source-map-support": "^0.5.21",
-    "supertest": "^6.3.3",
-    "ts-jest": "^29.1.0",
-    "ts-loader": "^9.4.3",
-    "ts-node": "^10.9.1",
-    "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.1.3",
-    "commitizen": "^4.3.0",
-    "cz-conventional-changelog-zh": "^0.0.2",
-    "standard-version": "^9.5.0"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "json",
-      "ts"
-    ],
-    "rootDir": "src",
-    "testRegex": ".*\\.spec\\.ts$",
-    "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
+    "name": "backend",
+    "version": "0.0.1",
+    "description": "",
+    "author": "",
+    "private": true,
+    "license": "UNLICENSED",
+    "scripts": {
+        "build": "nest build",
+        "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+        "start": "nest start",
+        "start:dev": "nest start --watch",
+        "start:debug": "nest start --debug --watch",
+        "start:prod": "node dist/main",
+        "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:cov": "jest --coverage",
+        "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+        "test:e2e": "jest --config ./test/jest-e2e.json",
+        "commit": "git-cz",
+        "release": "standard-version"
     },
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
-  }
+    "dependencies": {
+        "@nestjs/common": "^10.0.0",
+        "@nestjs/config": "^3.1.1",
+        "@nestjs/core": "^10.0.0",
+        "@nestjs/platform-express": "^10.2.10",
+        "@seald-io/nedb": "^4.0.2",
+        "reflect-metadata": "^0.1.13",
+        "rxjs": "^7.8.1"
+    },
+    "devDependencies": {
+        "@nestjs/cli": "^10.0.0",
+        "@nestjs/schematics": "^10.0.0",
+        "@nestjs/testing": "^10.0.0",
+        "@types/express": "^4.17.17",
+        "@types/jest": "^29.5.2",
+        "@types/nedb": "^1.8.16",
+        "@types/node": "^20.3.1",
+        "@types/supertest": "^2.0.12",
+        "@typescript-eslint/eslint-plugin": "^6.0.0",
+        "@typescript-eslint/parser": "^6.0.0",
+        "commitizen": "^4.3.0",
+        "cz-conventional-changelog-zh": "^0.0.2",
+        "eslint": "^8.42.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-prettier": "^5.0.0",
+        "jest": "^29.5.0",
+        "prettier": "^3.0.0",
+        "source-map-support": "^0.5.21",
+        "standard-version": "^9.5.0",
+        "supertest": "^6.3.3",
+        "ts-jest": "^29.1.0",
+        "ts-loader": "^9.4.3",
+        "ts-node": "^10.9.1",
+        "tsconfig-paths": "^4.2.0",
+        "typescript": "^5.1.3"
+    },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "rootDir": "src",
+        "testRegex": ".*\\.spec\\.ts$",
+        "transform": {
+            "^.+\\.(t|j)s$": "ts-jest"
+        },
+        "collectCoverageFrom": [
+            "**/*.(t|j)s"
+        ],
+        "coverageDirectory": "../coverage",
+        "testEnvironment": "node"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog-zh",
+            "defaultType": "[新增功能]",
+            "types": {
+                "[新增功能]": {
+                    "description": "新增功能点、新增需求",
+                    "title": "Features"
+                },
+                "[Bug 修复]": {
+                    "description": "  修复Bug,线上，测试，验收阶段的bug",
+                    "title": "Bug Fixes"
+                },
+                "[文档修改]": {
+                    "description": "文档增删改",
+                    "title": "Documentation"
+                },
+                "[样式修改]": {
+                    "description": "样式修改(空白、格式、缺少分号等)",
+                    "title": "Styles"
+                },
+                "[代码重构]": {
+                    "description": "既不修复bug也不添加新功能的更改",
+                    "title": "Code Refactoring"
+                },
+                "[性能优化]": {
+                    "description": "性能优化",
+                    "title": "Performance Improvements"
+                },
+                "[测试代码]": {
+                    "description": "增加测试",
+                    "title": "Tests"
+                },
+                "[编译代码]": {
+                    "description": "影响构建系统或外部依赖项的更改(示例范围:gulp、broccoli、npm)",
+                    "title": "Builds"
+                },
+                "[持续集成]": {
+                    "description": "对CI配置文件和脚本的更改(示例范围:Travis, Circle, BrowserStack, SauceLabs)",
+                    "title": "Continuous Integrations"
+                },
+                "[其他提交]": {
+                    "description": "除src目录或测试文件以外的修改",
+                    "title": "Chores"
+                },
+                "[回退更改]": {
+                    "description": "回退历史版本",
+                    "title": "Reverts"
+                },
+                "[修改冲突]": {
+                    "description": "修改冲突",
+                    "title": "Conflict"
+                },
+                "[字体修改]": {
+                    "description": "字体文件更新",
+                    "title": "Fonts"
+                },
+                "[删除文件]": {
+                    "description": "删除文件",
+                    "title": "Delete Files"
+                },
+                "[暂存文件]": {
+                    "description": "暂存文件",
+                    "title": "Stash Files"
+                }
+            }
+        }
+    }
 }
